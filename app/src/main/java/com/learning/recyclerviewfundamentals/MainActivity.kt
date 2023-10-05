@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , ListItemClickListener {
 
     val fruitList = listOf(
         Fruit("Mango", "Joe"),
@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         // here we need to pass the context to tell the layout
         // manager which layout will be the container
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MyRecyclerViewAdapter(fruitList) { selectedItem: Fruit ->
+        recyclerView.adapter = MyRecyclerViewAdapter(fruitList, this) /*{ selectedItem: Fruit ->
             listItemClicked(selectedItem)
-        }
+        }*/
 
 
     }
@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(
             this@MainActivity, "Supplier is : ${fruit.supplier}", Toast.LENGTH_LONG
         ).show()
+    }
+
+    override fun onItemClick(fruit: Fruit) {
+        Toast.makeText(this, "Selected Fruit is : ${fruit.name}", Toast.LENGTH_SHORT).show()
     }
 
 
