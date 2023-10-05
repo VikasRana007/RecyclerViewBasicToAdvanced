@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MyRecyclerViewAdapter(
     private val fruitList: List<Fruit>,
-    private val clickListener: (Fruit) -> Unit
+    private val clickListener: (Fruit) -> Unit      // This style of kotlin to receiving the function
 ) : RecyclerView.Adapter<MyViewHolder>() {
 // this adapter need the type , that should be View Holder class type
 // so we need to create a view holder class so let it be
@@ -22,7 +22,7 @@ class MyRecyclerViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // use to display data on list item, since we have returned 5 or what ever the size...
         val fruit = fruitList[position]
-        holder.bind(fruit, clickListener)
+        holder.bind(fruit, clickListener)            // This style io kotlin to sending the function
     }
 
     override fun getItemCount(): Int {
@@ -31,13 +31,13 @@ class MyRecyclerViewAdapter(
 
 }
 
-class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(fruit: Fruit, clickListener: (Fruit) -> Unit) {
+class MyViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    fun bind(fruit: Fruit, clickListener: (Fruit) -> Unit) {                 // This style of kotlin to receiving the function
         val myTextView = view.findViewById<TextView>(R.id.tvName)
         myTextView.text = fruit.name
 
         view.setOnClickListener {
-            (clickListener(fruit))
+            clickListener(fruit)
         }
     }
 
